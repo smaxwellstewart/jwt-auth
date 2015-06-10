@@ -36,7 +36,7 @@ class PayloadFactory
     /**
      * @var array
      */
-    protected $defaultClaims = ['iss', 'iat', 'exp', 'nbf', 'jti'];
+    protected $defaultClaims = ['jti'];
 
     /**
      * @var array
@@ -180,9 +180,8 @@ class PayloadFactory
     protected function jti()
     {
         $sub = array_get($this->claims, 'sub', '');
-        $nbf = array_get($this->claims, 'nbf', '');
-
-        return md5(sprintf('jti.%s.%s', $sub, $nbf));
+	$time = time();
+        return md5(sprintf('jti.%s.%s', $sub, $time));
     }
 
     /**
